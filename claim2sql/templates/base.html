@@ -26,10 +26,12 @@
     <div class="ui main menu">
         <div class="ui text container">
             <div class="header item home-link">
-                <!-- TODO: update logo and link to home -->
-                <img alt="claimbuster_logo" class="logo" src="{{ url_for('static', path='/img/temp-logo.png') }}">
+                <!-- TODO: update logo -->
+                <a href="/" class="header item">
+                    <img alt="claimbuster_logo" class="logo" src="{{ url_for('static', path='/img/temp-logo.png') }}">
+                </a>
             </div>
-            <a href="/fact-check.html" class="ui right floated item">Fact-Check</a>
+            <a href="/fact-check" class="ui right floated item">Fact-Check</a>
             <a href="/acknowledgement/" class="ui right floated item">Acknowledgement</a>
             <a href="/src/publications.html" class="ui right floated item">Publications</a>
         </div>
@@ -82,9 +84,11 @@
                 </div>
             </div>
             <div class="ui inverted section divider"></div>
-            <!-- TODO: update temp logo and link to home -->
-            <img alt="claimbuster_logo" src="{{ url_for('static', path='/img/temp-logo.png') }}"
-                class="ui centered mini image home-link">
+            <!-- TODO: update temp logo -->
+            <a href="/">
+                <img alt="claimbuster_logo" src="{{ url_for('static', path='/img/temp-logo.png') }}"
+                    class="ui centered mini image home-link">
+            </a>
             <div class="ui horizontal inverted small divided link list">
                 <a class="item email-idir" href="">
                     <i class="fas fa-info" data-fa-transform="shrink-5"></i>d<i class="fas fa-info"

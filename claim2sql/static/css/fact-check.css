@@ -1,33 +1,63 @@
 .container {
-    width: 800px;
-    margin: 0 auto;
-    padding: 5px 20px;
     font-family: 'Montserrat', sans-serif;
     text-align: left;
 }
 
-h1 {
+.fact-check-header {
     font-family: 'Montserrat', sans-serif;
     text-align: left;
-    font-size: 28px;
+    font-size: 1.9rem;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 0.3rem;
 }
 
-.description {
+.fact-check-description {
     text-align: left;
-    margin-top: 5px;
+    margin-top: 0.3rem;
 }
 
-h2 {
+.sample-claims-header {
     font-family: 'Montserrat', sans-serif;
     text-align: left;
-    font-size: 18px;
+    font-size: 1.3rem;
     font-weight: bold;
+    margin-bottom: 0.3rem;
 }
 
-ul {
+.sample-claims-list {
     text-align: left;
-    margin-top: 5px;
-    margin-bottom: 30px;
+    margin-top: 0.3rem;
+    margin-bottom: 1.9rem;
+}
+
+.ui.button {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+
+.results-header {
+    font-family: 'Montserrat', sans-serif;
+    text-align: left;
+    font-size: 1.9rem;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+    margin-top: 1.9rem !important;
+}
+
+.results-description {
+    text-align: left;
+    margin-top: 0.3rem;
+}
+
+.results-list {
+    text-align: left;
+    margin-top: 0.3rem;
+    margin-bottom: 1.9rem;
+}
+
+.results-list li:nth-child(5),
+.results-list li:nth-child(6),
+.results-list li:nth-child(7) {
+    margin-left: 1.3rem;
+    list-style: circle;
 }
