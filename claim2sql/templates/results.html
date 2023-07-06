@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Results</title>
+    <link href="{{ url_for('static', path='/css/results.css') }}" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>Results</h1>
+        <p class="description">What we've found:</p>
+
+        <ul class="result-list">
+            <li>Input sentence: {{model_outputs.input_sentence}}</li>
+            <li>Frame: {{model_outputs.frame}}</li>
+            <li>Target: {{model_outputs.target}}</li>
+            <li>Frame elements:</li>
+            <li>Agent: {{model_outputs.congress_member}}</li>
+            <li>Issue: {{model_outputs.bill_title}}</li>
+            <li>Position: {{model_outputs.target}}</li>
+            <li>Bill title: {{model_outputs.bill_title}}</li>
+            <li>Bill ID: {{model_outputs.bill_id}}</li>
+            <li>Congress member: {{model_outputs.congress_member}}</li>
+            <li>Member ID: {{model_outputs.member_id}}</li>
+        </ul>
+    </div>
+</body>
+
+</html>

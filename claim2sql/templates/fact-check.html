@@ -1,0 +1,38 @@
+{% extends "base.html" %} {% block title %} ClaimBuster: Automated Live
+Fact-checking {% endblock title %} {% block css %}
+<link href="{{ url_for('static', path='/css/fact-check.css') }}" rel="stylesheet" />
+{% endblock css %} {% block content %}
+
+<!-- TODO: change title -->
+<head>
+    <title>Fact-Check</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Fact-check a claim</h1>
+        <p class="description">
+            Input your claim below and check if it's true! See below for sample
+            sentences.
+        </p>
+
+        <h2>Sample sentences</h2>
+        <ul>
+            <li>Sentence 1</li>
+            <li>Sentence 2</li>
+            <li>Sentence 3</li>
+        </ul>
+
+        <!-- TODO: change font, override semantic ui -->
+        <div class="ui fluid action input">
+            <input id="input-text" type="text" placeholder="Input claim here.">
+            <div class="ui button" onclick="submitForm()">Check</div>
+        </div>
+
+        <div id="result-container"></div>
+
+    </div>
+</body>
+{% endblock content %} {% block js %}
+<script src="{{ url_for('static', path='/js/fact-check.js') }}"></script>
+{% endblock js %}

@@ -1,0 +1,33 @@
+.container {
+    width: 800px;
+    margin: 0 auto;
+    padding: 5px 20px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: left;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    text-align: left;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.description {
+    text-align: left;
+    margin-top: 5px;
+}
+
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+ul {
+    text-align: left;
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
