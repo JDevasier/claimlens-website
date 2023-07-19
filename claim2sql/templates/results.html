@@ -1,18 +1,46 @@
 <div class="container">
     <h1 class="results-header">Results</h1>
-    <p class="results-description">What we've found:</p>
+    <p class="results-description1">What we've found:</p>
+    <p class="results-description2">Tip: Hover over the highlighted elements to view the breakdown.</p>
+
+    <div id="inputSentence"></div>
 
     <ul class="results-list">
         <li>Input sentence: {{model_outputs.input_sentence}}</li>
         <li>Frame: {{model_outputs.frame}}</li>
-        <li>Target: {{model_outputs.target}}</li>
+        <li><span class="highlight-target">Target:</span> {{model_outputs.target}}</li>
         <li>Frame elements:</li>
-        <li>Agent: {{model_outputs.congress_member}}</li>
-        <li>Issue: {{model_outputs.bill_title}}</li>
-        <li>Position: {{model_outputs.target}}</li>
+        <li><span class="highlight-agent">Agent:</span> {{model_outputs.input_sentence[model_outputs.frame_elements.Agent.start:model_outputs.frame_elements.Agent.end]}}</li>
+        <li><span class="highlight-issue">Issue:</span> {{model_outputs.input_sentence[model_outputs.frame_elements.Issue.start:model_outputs.frame_elements.Issue.end]}}</li>
+        <li><span class="highlight-position">Position:</span> {{model_outputs.input_sentence[model_outputs.frame_elements.Position.start:model_outputs.frame_elements.Position.end]}}</li>
         <li>Bill title: {{model_outputs.bill_title}}</li>
         <li>Bill ID: {{model_outputs.bill_id}}</li>
         <li>Congress member: {{model_outputs.congress_member}}</li>
         <li>Member ID: {{model_outputs.member_id}}</li>
     </ul>
+
+</div>
+
+<div class="results-column-container">
+    <div class="results-column">
+        <h1 class="results-column-header">About {{model_outputs.congress_member}}</h1>
+        <li class="results-column-description"><strong>Member ID:</strong> {{model_outputs.member_id}}</li>
+        <p>Joseph Robinette Biden, Jr. was born in Scranton, Pennsylvania, the first of four children of Catherine
+            Eugenia Finnegan Biden
+            and Joseph Robinette Biden, Sr. In 1953, the Biden family moved to Claymont, Delaware.
+            President Biden graduated from the University of Delaware and Syracuse Law School and served on the New
+            Castle County Council.</p>
+        <a href="https://www.whitehouse.gov/administration/president-biden/">More Info</a>
+    </div>
+
+    <div class="results-column">
+        <h1 class="results-column-header">Related Bills</h1>
+        <li class="results-column-description"><strong>Bill title:</strong> {{model_outputs.bill_title}}</li>
+        <li class="results-column-description"><strong>Bill ID:</strong> {{model_outputs.bill_id}}</li>
+        <p>The resolution authorized President Bush to use the Armed Forces of the United States
+            "as he determines to be necessary and appropriate" in order to "defend the national security of
+            the United States against the continuing threat posed by Iraq; and enforce all relevant United Nations
+            Security Council Resolutions regarding Iraq."</p>
+        <a href="https://example.com">More Info</a>
+    </div>
 </div>

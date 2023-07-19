@@ -32,8 +32,12 @@
 
 .ui.button {
     font-family: 'Montserrat', sans-serif !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
+.ui.fluid.action.input {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); 
+}
 
 .results-header {
     font-family: 'Montserrat', sans-serif;
@@ -44,14 +48,42 @@
     margin-top: 1.9rem !important;
 }
 
-.results-description {
+.results-description1 {
     text-align: left;
     margin-top: 0.3rem;
 }
 
+.results-description2 {
+    text-align: left;
+}
+
+#inputSentence {
+    margin-bottom: 0.3rem;
+    font-size: 1.3rem;
+}
+
+.highlight-agent {
+    background-color: #002868; 
+    color:#fff;
+}
+
+.highlight-target {
+    background-color: #000; 
+    color: #fff;
+}
+
+.highlight-position {
+    background-color: #BF0A30; 
+    color: #fff;
+}
+
+.highlight-issue {
+    background-color: #808080; 
+    color: #fff;
+}
+
 .results-list {
     text-align: left;
-    margin-top: 0.3rem;
     margin-bottom: 1.9rem;
 }
 
@@ -60,4 +92,83 @@
 .results-list li:nth-child(7) {
     margin-left: 1.3rem;
     list-style: circle;
+}
+
+/* Define a class for each element index */
+.highlight:nth-child(1) {
+    background-color: #002868; 
+    color:#fff;
+}
+
+.highlight:nth-child(2) {
+    background-color: #000; 
+    color: #fff;
+}
+
+.highlight:nth-child(3) {
+    background-color: #BF0A30; 
+    color: #fff;
+}
+
+.highlight:nth-child(4) {
+    background-color: #808080; 
+    color: #fff;
+}
+
+.highlight {
+    position: relative;
+}
+
+.popup {
+    visibility: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: visibility 0.2s ease-in-out;
+}
+
+.highlight:hover .popup {
+    visibility: visible;
+}
+
+.results-column-container {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.results-column {
+    width: 48%;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    height: 400px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.results-column-header{
+    margin-top: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+}
+
+.results-column-description{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    list-style-type: none;
+}
+
+.results-column p {
+    margin-top: 1.3rem;
+    margin-bottom: 0;
+    text-align: justify;
+}
+
+.results-column a {
+    display: block; /* Make the link a block element to take full width */
 }

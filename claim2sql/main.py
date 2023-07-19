@@ -29,7 +29,7 @@ async def submit_text(request: Request):
         "frame":"Vote",
         "target":"Voted",
         "frame_elements":{
-            "Agent":{"start":0, "end":8},
+            "Agent":{"start":0, "end":9},
             "Issue":{"start":20, "end":32},
             "Position":{"start":16, "end":19}
         },

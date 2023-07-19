@@ -4,6 +4,7 @@ Fact-checking {% endblock title %} {% block css %}
 {% endblock css %} {% block content %}
 
 <!-- TODO: change title -->
+
 <head>
     <title>Fact-Check</title>
 </head>
@@ -15,7 +16,7 @@ Fact-checking {% endblock title %} {% block css %}
             Input your claim below and check if it's true! See below for sample claims.
         </p>
 
-        <h1 class="sample-claims-header">Fact-check a claim</h1>
+        <h1 class="sample-claims-header">Sample claims</h1>
         <ul class="sample-claims-list">
             <li>Joe Biden voted for the Iraq War.</li>
             <li>Ron DeSantis voted in an agricultural bill to give food stamps to illegal immigrants.</li>
@@ -28,7 +29,7 @@ Fact-checking {% endblock title %} {% block css %}
             <div class="ui button" onclick="submitForm()">Check</div>
         </div>
 
-        <div id="result-container"></div>
+        <div id="results-container"></div>
 
     </div>
 </body>
