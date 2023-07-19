@@ -62,22 +62,22 @@
     font-size: 1.3rem;
 }
 
-.highlight-agent {
+.fe-agent {
     background-color: #002868; 
     color:#fff;
 }
 
-.highlight-target {
+.fe-target {
     background-color: #000; 
     color: #fff;
 }
 
-.highlight-position {
+.fe-position {
     background-color: #BF0A30; 
     color: #fff;
 }
 
-.highlight-issue {
+.fe-issue {
     background-color: #808080; 
     color: #fff;
 }
@@ -147,7 +147,6 @@
     padding: 20px;
     background-color: #f1f1f1;
     border-radius: 4px;
-    height: 400px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 
