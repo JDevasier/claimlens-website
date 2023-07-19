@@ -1,22 +1,23 @@
 <div class="container">
     <h1 class="results-header">Results</h1>
     <p class="results-description1">What we've found:</p>
-    <p class="results-description2">Tip: Hover over the highlighted elements to view the breakdown.</p>
+    <p class="results-description2">Tip: Hover over the highlighted frame elements to view the definition.</p>
 
-    <div>{{fe_html|safe}}</div>
+    <div id="inputSentence">{{fe_html|safe}}</div>
 
     <ul class="results-list">
-        <li>Input sentence: {{model_outputs.input_sentence}}</li>
         <li>Frame: {{model_outputs.frame}}</li>
-        <li><span class="highlight-target">Target:</span> {{model_outputs.target}}</li>
+        <li>Target: {{model_outputs.target}}</li>
         <li>Frame elements:</li>
-        <li><span class="highlight-agent">Agent:</span> {{model_outputs.input_sentence[model_outputs.frame_elements.Agent.start:model_outputs.frame_elements.Agent.end]}}</li>
-        <li><span class="highlight-issue">Issue:</span> {{model_outputs.input_sentence[model_outputs.frame_elements.Issue.start:model_outputs.frame_elements.Issue.end]}}</li>
-        <li><span class="highlight-position">Position:</span> {{model_outputs.input_sentence[model_outputs.frame_elements.Position.start:model_outputs.frame_elements.Position.end]}}</li>
-        <li>Bill title: {{model_outputs.bill_title}}</li>
-        <li>Bill ID: {{model_outputs.bill_id}}</li>
-        <li>Congress member: {{model_outputs.congress_member}}</li>
-        <li>Member ID: {{model_outputs.member_id}}</li>
+        <li><span class="fe-agent">Agent:</span>
+            {{model_outputs.input_sentence[model_outputs.frame_elements.Agent.start:model_outputs.frame_elements.Agent.end]}}
+        </li>
+        <li><span class="fe-position">Position:</span>
+            {{model_outputs.input_sentence[model_outputs.frame_elements.Position.start:model_outputs.frame_elements.Position.end]}}
+        </li>
+        <li><span class="fe-issue">Issue:</span>
+            {{model_outputs.input_sentence[model_outputs.frame_elements.Issue.start:model_outputs.frame_elements.Issue.end]}}
+        </li>
     </ul>
 
 </div>
@@ -24,6 +25,7 @@
 <div class="results-column-container">
     <div class="results-column">
         <h1 class="results-column-header">About {{model_outputs.congress_member}}</h1>
+        <img src="{{ image_url }}" class="agent-image">
         <li class="results-column-description"><strong>Member ID:</strong> {{model_outputs.member_id}}</li>
         <p>{{agent_summary}}</p>
         <a href="{{agent_url}}">More Info</a>
@@ -34,11 +36,11 @@
 
         <!-- Use jinja to loop through each bills -->
         {% for bill in model_outputs.bills %}
-            <div class="ui segment">
-            <li class="results-column-description"><strong>Bill title:</strong> {{bill.bill_title}}</li>
-            <li class="results-column-description"><strong>Bill ID:</strong> {{bill.bill_id}}</li>    
-            <li class="results-column-description"><strong>Bill summary:</strong> {{bill.bill_summary}}</li>
-            </div>
+        <div class="ui segment">
+            <li class="results-column-description"><strong>Bill Title:</strong> {{bill.bill_title}}</li>
+            <li class="results-column-description"><strong>Bill ID:</strong> {{bill.bill_id}}</li>
+            <li class="results-column-description"><strong>Bill Summary:</strong> {{bill.bill_summary}}</li>
+        </div>
         {% endfor %}
     </div>
 </div>

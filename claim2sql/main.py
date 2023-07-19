@@ -4,6 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import json
 import wikipediaapi
+import requests
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -11,6 +12,28 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 wiki = wikipediaapi.Wikipedia('idir_lab', 'en')
+
+def get_member_image_url(member_name):
+    url = "https://en.wikipedia.org/w/api.php"
+    params = {
+        "action": "query",
+        "format": "json",
+        "titles": member_name,
+        "prop": "pageimages",
+        "pithumbsize": 300  # Set the desired thumbnail size (e.g., 300 pixels)
+    }
+    response = requests.get(url, params=params)
+    data = response.json()
+    page = next(iter(data["query"]["pages"].values()))
+
+    if "original" in page["thumbnail"]:
+        # If the "original" size is available, use it for higher quality
+        image_url = page["thumbnail"]["original"]
+    else:
+        # Otherwise, use the larger thumbnail size requested
+        image_url = page["thumbnail"]["source"]
+
+    return image_url
 
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
@@ -57,7 +80,6 @@ async def submit_text(request: Request):
         "member_id":"B000444"
     }
 
-
     fe_definitions = {
         "Agent": "The conscious entity, generally a person, that performs the voting decision on an Issue.",
         "Issue": "The matter which the Agent has a positive or negative opinion about and either votes for or votes against.",
@@ -68,8 +90,6 @@ async def submit_text(request: Request):
         "Place": "The location where the voting decision took place.",
         "Support_rate": "The percentage of Agent's total votes, in which the Agent took the same position with a Side for a specific period of time."
     }
-
-
 
     # Build html for frame elements
     prev_end = 0
@@ -82,12 +102,12 @@ async def submit_text(request: Request):
         prev_end = span['end']
     fe_html += f"<span>{model_outputs['input_sentence'][prev_end:]}</span>"
 
-
-
     # Get agent wikipedia page
     agent_page = wiki.page(model_outputs["congress_member"])
     agent_summary = agent_page.summary.split("\n")[0]
-
     agent_url = agent_page.fullurl
 
-    return templates.TemplateResponse("results.html", {"request": request, "model_outputs": model_outputs, "agent_summary": agent_summary, "agent_url": agent_url, "fe_html": fe_html})
+    # Get congress member image
+    image_url = get_member_image_url(model_outputs["congress_member"])
+
+    return templates.TemplateResponse("results.html", {"request": request, "model_outputs": model_outputs, "agent_summary": agent_summary, "agent_url": agent_url, "fe_html": fe_html, "image_url": image_url})
