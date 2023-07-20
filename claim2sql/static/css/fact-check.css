@@ -32,11 +32,11 @@
 
 .ui.button {
     font-family: 'Montserrat', sans-serif !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05);
 }
 
 .ui.fluid.action.input {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05);
 }
 
 .results-header {
@@ -48,18 +48,19 @@
     margin-top: 1.9rem !important;
 }
 
-.results-description1 {
+.results-description {
     text-align: left;
     margin-top: 0.3rem;
-}
-
-.results-description2 {
-    text-align: left;
 }
 
 #inputSentence {
     margin-bottom: 0.3rem;
     font-size: 1.3rem;
+}
+
+.results-tips {
+    text-align: left;
+    font-size: 0.8rem;
 }
 
 .fe-agent {
