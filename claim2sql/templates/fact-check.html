@@ -4,33 +4,30 @@ Fact-checking {% endblock title %} {% block css %}
 {% endblock css %} {% block content %}
 
 <!-- TODO: change title -->
-
 <head>
     <title>Fact-Check</title>
 </head>
 
 <body>
     <div class="container">
-        <h1 class="fact-check-header">Fact-check a claim</h1>
+        <h1 class="fact-check-header">Fact-Check a Claim</h1>
         <p class="fact-check-description">
             Input your claim below and check if it's true! See below for sample claims.
         </p>
 
-        <h1 class="sample-claims-header">Sample claims</h1>
+        <h1 class="sample-claims-header">Sample Claims</h1>
         <ul class="sample-claims-list">
             <li>Joe Biden voted for the Iraq War.</li>
             <li>Ron DeSantis voted in an agricultural bill to give food stamps to illegal immigrants.</li>
             <li>Marsha Blackburn voted against military pay raise.</li>
         </ul>
 
-        <!-- TODO: change font, override semantic ui -->
         <div class="ui fluid action input">
             <input id="input-text" type="text" placeholder="Input claim here.">
             <div class="ui button" onclick="submitForm()">Check</div>
         </div>
 
         <div id="results-container"></div>
-
     </div>
 </body>
 {% endblock content %} {% block js %}

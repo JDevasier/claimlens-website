@@ -19,7 +19,6 @@
             {{model_outputs.input_sentence[model_outputs.frame_elements.Issue.start:model_outputs.frame_elements.Issue.end]}}
         </li>
     </ul>
-
 </div>
 
 <div class="results-column-container">
@@ -33,7 +32,6 @@
 
     <div class="results-column">
         <h1 class="results-column-header">Related Bills</h1>
-
         <!-- Use jinja to loop through each bills -->
         {% for bill in model_outputs.bills %}
         <div class="ui segment">

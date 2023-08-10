@@ -13,10 +13,42 @@ ClaimBuster: Automated Live Fact-checking
 </head>
 
 <body>
-    <div class="container">
-        <h1>Research Project Introduction</h1>
+    <h1 class="intro-main-header">Political Claims Fact-Checker</h1>
+
+    <div class="image">
+        <!-- TODO: change ILLEGAL COPYRIGHTED image -->
+        <img src="{{ url_for('static', path='/img/temp-intro.png') }}">
     </div>
+    <section class="content">
+        <h2 class="intro-header">About the Project</h2>
+        <p class="intro-description">Our research project focuses on analyzing and verifying claims made by political
+            figures. In an era of information overload, it's crucial to separate truth from misinformation. We aim to
+            provide accurate and unbiased information to the public.</p>
+
+        <div class="intro-columns">
+            <div class="intro-column">
+                <h3 class="intro-subheader">Fact-Checking with SQL</h3>
+                <p class="intro-subdescription">Our process involves harnessing the power of SQL to efficiently manage
+                    and query vast amounts of data. We design sophisticated SQL queries to sift through historical
+                    records enabling us to verify the accuracy of claims.</p>
+            </div>
+            <div class="intro-column">
+                <h3 class="intro-subheader">Frames Model</h3>
+                <p class="intro-subdescription">We utilize advanced frames models, which enable us to contextualize
+                    statements and claims within broader narratives. These models allow us to assess not only the
+                    factual accuracy of claims but also their implications within political discourse and historical
+                    contexts, providing a comprehensive analysis.</p>
+            </div>
+            <div class="intro-column">
+                <h3 class="intro-subheader">Data Collection</h3>
+                <p class="intro-subdescription">Collecting accurate and reliable data is a cornerstone of our project.
+                    We source information from diverse and reputable datasets, ensuring our fact-checking process is
+                    based on credible evidence.</p>
+            </div>
+        </div>
+    </section>
 </body>
+
 {% endblock content %}
 {% block js %}
 <script src="{{ url_for('static', path='/js/index.js') }}"></script>
