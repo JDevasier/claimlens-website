@@ -1,10 +1,10 @@
 from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-import json
 import wikipediaapi
 import requests
+import httpx
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -40,15 +40,11 @@ async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 @app.get("/fact-check", response_class=HTMLResponse)
-async def read_page1(request: Request):
+async def read_fact_check(request: Request):
     return templates.TemplateResponse("fact-check.html", {"request": request})
 
-@app.post("/submit", response_class=HTMLResponse)
-async def submit_text(request: Request):
-    form_data = await request.body()
-    data = json.loads(form_data)
-
-    user_input = data.get("text")
+@app.get("/model", response_class=JSONResponse)
+async def model(query: str, request: Request):
 
     model_outputs = {
         "input_sentence":"Joe Biden voted for the Iraq War.",
@@ -80,6 +76,18 @@ async def submit_text(request: Request):
         "member_id":"B000444"
     }
 
+    return model_outputs
+
+@app.get("/submit", response_class=HTMLResponse)
+async def submit_text(query: str, request: Request):
+    api_url = "http://127.0.0.1:8000/model"
+
+    # Call API to retrieve model inputs
+    async with httpx.AsyncClient() as client:
+        model_response = await client.get(api_url, params={"query": query})
+        model_outputs = model_response.json()
+
+    # Define frame element definitions
     fe_definitions = {
         "Agent": "The conscious entity, generally a person, that performs the voting decision on an Issue.",
         "Issue": "The matter which the Agent has a positive or negative opinion about and either votes for or votes against.",
@@ -110,4 +118,7 @@ async def submit_text(request: Request):
     # Get congress member image
     image_url = get_member_image_url(model_outputs["congress_member"])
 
-    return templates.TemplateResponse("results.html", {"request": request, "model_outputs": model_outputs, "agent_summary": agent_summary, "agent_url": agent_url, "fe_html": fe_html, "image_url": image_url})
+    # Render results page
+    return templates.TemplateResponse("results.html", {"request": request, "model_outputs": model_outputs, 
+                                                       "agent_summary": agent_summary, "agent_url": agent_url, 
+                                                       "fe_html": fe_html, "image_url": image_url})

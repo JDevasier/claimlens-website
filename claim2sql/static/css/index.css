@@ -19,14 +19,12 @@ body {
 .image img {
     max-width: 100%;
     height: auto;
-    margin-bottom: 1.3rem;
-
+    margin-bottom: 2rem;
 }
 
 .content {
     max-width: 1200px;
     margin: 0 auto;
-
 }
 
 .intro-header {
@@ -34,12 +32,12 @@ body {
     text-align: left;
     font-size: 1.9rem;
     font-weight: bold;
-    margin-bottom: 0.3rem;
+    margin-bottom: 1rem;
 }
 
 .intro-description {
     text-align: left;
-    margin-top: 0.3rem;
+    margin-bottom: 2rem;
 }
 
 .intro-columns {

@@ -5,31 +5,33 @@ function submitForm() {
         return;
     }
 
-    fetch("/submit", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ text: userInput }),
-    })
-        .then((response) => response.text())
-        .then((html) => {
-            document.getElementById("results-container").innerHTML = html;
+    //  Create AJAX call to send user input to server
+    $.ajax({
+        type: "GET",
+        url: "/submit",
+        data: { query: userInput },
+        success: function (response) {
+            document.getElementById("results-container").innerHTML = response;
             $("html,body").animate(
                 {
                     scrollTop: $("#input-text").offset().top,
                 },
                 "slow"
             );
-            $('.fe-agent, .fe-issue, .fe-side, .fe-position, .fe-frequency, .fe-time, .fe-place, .fe-support_rate')
-                .popup({
-                    inline: true,
-                    hoverable: true,
-                    position: 'top center',
-                    delay: {
-                        show: 0,
-                        hide: 0
-                    }
-                });
-        });
+
+            $('.fe-agent, .fe-issue, .fe-side, .fe-position, .fe-frequency, .fe-time, .fe-place, .fe-support_rate').popup({
+                inline: true,
+                hoverable: true,
+                position: 'top center',
+                delay: {
+                    show: 0,
+                    hide: 0
+                }
+            });
+
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
 }
