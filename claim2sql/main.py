@@ -80,11 +80,11 @@ async def model(query: str, request: Request):
 
 @app.get("/submit", response_class=HTMLResponse)
 async def submit_text(query: str, request: Request):
-    api_url = "http://127.0.0.1:8000/model"
+    api_url = "https://idir.uta.edu/claim2sql/"
 
     # Call API to retrieve model inputs
     async with httpx.AsyncClient() as client:
-        model_response = await client.get(api_url, params={"query": query})
+        model_response = await client.get(api_url, params={"claim": query})
         model_outputs = model_response.json()
 
     # Define frame element definitions
