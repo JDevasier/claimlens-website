@@ -80,13 +80,13 @@ async def model(query: str, request: Request):
 
 @app.get("/submit", response_class=HTMLResponse)
 async def submit_text(query: str, request: Request):
-    api_url = "https://idir.uta.edu/claim2sql/"
+    api_url = "http://127.0.0.1:8000/api/"
 
     # Call API to retrieve model inputs
     async with httpx.AsyncClient() as client:
         model_response = await client.get(api_url, params={"claim": query})
         model_outputs = model_response.json()
-
+    
     # Define frame element definitions
     fe_definitions = {
         "Agent": "The conscious entity, generally a person, that performs the voting decision on an Issue.",
@@ -103,6 +103,9 @@ async def submit_text(query: str, request: Request):
     prev_end = 0
     fe_html = ""
     for fe, span in sorted(model_outputs["frame_elements"].items(), key=lambda x: x[1]['start']):
+        if span['start'] == -1 or span['end'] == -1:
+            continue
+        
         if prev_end != span['start']:
             fe_html += f"<span class='non-fe'>{model_outputs['input_sentence'][prev_end:span['start']]}</span>"
         fe_html += f"<span data-content='{fe_definitions[fe]}' class='fe-{fe.lower()}'>{model_outputs['input_sentence'][span['start']:span['end']]}</span>"

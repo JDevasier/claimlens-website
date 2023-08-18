@@ -26,7 +26,7 @@
         <h1 class="results-column-header">About {{model_outputs.congress_member}}</h1>
         <img src="{{ image_url }}" class="agent-image">
         <li class="results-column-description"><strong>Member ID:</strong> {{model_outputs.member_id}}</li>
-        <p>{{agent_summary}}</p>
+        <p>{{agent_summary|truncate(1000, False)}}</p>
         <a href="{{agent_url}}">More Info</a>
     </div>
 
@@ -36,8 +36,8 @@
         {% for bill in model_outputs.bills %}
         <div class="ui segment">
             <li class="results-column-description"><strong>Bill Title:</strong> {{bill.bill_title}}</li>
-            <li class="results-column-description"><strong>Bill ID:</strong> {{bill.bill_id}}</li>
-            <li class="results-column-description"><strong>Bill Summary:</strong> {{bill.bill_summary}}</li>
+            <!-- <li class="results-column-description"><strong>Bill ID:</strong> {{bill.bill_id}}</li> -->
+            <li class="results-column-description"><strong>Bill Summary:</strong> {{bill.bill_summary|truncate(200, False)}}</li>
         </div>
         {% endfor %}
     </div>
