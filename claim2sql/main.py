@@ -26,12 +26,16 @@ def get_member_image_url(member_name):
     data = response.json()
     page = next(iter(data["query"]["pages"].values()))
 
-    if "original" in page["thumbnail"]:
-        # If the "original" size is available, use it for higher quality
-        image_url = page["thumbnail"]["original"]
+    if "thumbnail" not in page:
+        # If no thumbnail is available, use a default image
+        image_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png"
     else:
-        # Otherwise, use the larger thumbnail size requested
-        image_url = page["thumbnail"]["source"]
+        if "original" in page["thumbnail"]:
+            # If the "original" size is available, use it for higher quality
+            image_url = page["thumbnail"]["original"]
+        else:
+            # Otherwise, use the larger thumbnail size requested
+            image_url = page["thumbnail"]["source"]
 
     return image_url
 
