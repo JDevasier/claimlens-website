@@ -1,3 +1,4 @@
+# from turtle import mode
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -11,7 +12,8 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="templates")
 
-wiki = wikipediaapi.Wikipedia('idir_lab', 'en')
+wiki = wikipediaapi.Wikipedia("idir_lab", "en")
+
 
 def get_member_image_url(member_name):
     url = "https://en.wikipedia.org/w/api.php"
@@ -20,7 +22,7 @@ def get_member_image_url(member_name):
         "format": "json",
         "titles": member_name,
         "prop": "pageimages",
-        "pithumbsize": 300  # Set the desired thumbnail size (e.g., 300 pixels)
+        "pithumbsize": 300,  # Set the desired thumbnail size (e.g., 300 pixels)
     }
     response = requests.get(url, params=params)
     data = response.json()
@@ -39,58 +41,62 @@ def get_member_image_url(member_name):
 
     return image_url
 
+
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
+
 
 @app.get("/fact-check", response_class=HTMLResponse)
 async def read_fact_check(request: Request):
     return templates.TemplateResponse("fact-check.html", {"request": request})
 
+
 @app.get("/model", response_class=JSONResponse)
 async def model(query: str, request: Request):
-
     model_outputs = {
-        "input_sentence":"Joe Biden voted for the Iraq War.",
-        "frame":"Vote",
-        "target":"Voted",
-        "frame_elements":{
-            "Agent":{"start":0, "end":9},
-            "Issue":{"start":20, "end":32},
-            "Position":{"start":16, "end":19}
+        "input_sentence": "Joe Biden voted for the Iraq War.",
+        "frame": "Vote",
+        "target": "Voted",
+        "frame_elements": {
+            "Agent": {"start": 0, "end": 9},
+            "Issue": {"start": 20, "end": 32},
+            "Position": {"start": 16, "end": 19},
         },
-        "bills":[
+        "bills": [
             {
-                "bill_title":"Iraq War Resolution",
-                "bill_id":"hjres114-107",
-                "bill_summary":"A joint resolution to authorize the use of United States Armed Forces against Iraq."
-            }, 
-            {
-                "bill_title":"Gun Control Act",
-                "bill_id":"hjres114-110",
-                "bill_summary":"A bill to restrict the use of guns in the United States."
+                "bill_title": "Iraq War Resolution",
+                "bill_id": "hjres114-107",
+                "bill_summary": "A joint resolution to authorize the use of United States Armed Forces against Iraq.",
             },
             {
-                "bill_title":"Abortion Act",
-                "bill_id":"hjres114-130",
-                "bill_summary":"A bill to allow the use of abortion in the United States."
-            }
+                "bill_title": "Gun Control Act",
+                "bill_id": "hjres114-110",
+                "bill_summary": "A bill to restrict the use of guns in the United States.",
+            },
+            {
+                "bill_title": "Abortion Act",
+                "bill_id": "hjres114-130",
+                "bill_summary": "A bill to allow the use of abortion in the United States.",
+            },
         ],
-        "congress_member":"Joe Biden",
-        "member_id":"B000444"
+        "congress_member": "Joe Biden",
+        "member_id": "B000444",
     }
 
     return model_outputs
 
+
 @app.get("/submit", response_class=HTMLResponse)
 async def submit_text(query: str, request: Request):
-    api_url = "http://127.0.0.1:8000/api/"
+    api_url = "http://idir.uta.edu/claimlens/api/"
 
     # Call API to retrieve model inputs
     async with httpx.AsyncClient() as client:
-        model_response = await client.get(api_url, params={"claim": query})
+        # model_response = await client.get(api_url, params={"claim": query})
+        model_response = requests.get(api_url, params={"claim": query})
         model_outputs = model_response.json()
-    
+
     # Define frame element definitions
     fe_definitions = {
         "Agent": "The conscious entity, generally a person, that performs the voting decision on an Issue.",
@@ -100,21 +106,23 @@ async def submit_text(query: str, request: Request):
         "Frequency": "The number of times that the Agent made the same voting decision on an Issue.",
         "Time": "This FE identifies the time when the Agent performs the voting decision.",
         "Place": "The location where the voting decision took place.",
-        "Support_rate": "The percentage of Agent's total votes, in which the Agent took the same position with a Side for a specific period of time."
+        "Support_rate": "The percentage of Agent's total votes, in which the Agent took the same position with a Side for a specific period of time.",
     }
 
     # Build html for frame elements
     prev_end = 0
     fe_html = ""
-    for fe, span in sorted(model_outputs["frame_elements"].items(), key=lambda x: x[1]['start']):
-        if span['start'] == -1 or span['end'] == -1:
+    for fe, span in sorted(
+        model_outputs["frame_elements"].items(), key=lambda x: x[1]["start"]
+    ):
+        if span["start"] == -1 or span["end"] == -1:
             continue
-        
-        if prev_end != span['start']:
+
+        if prev_end != span["start"]:
             fe_html += f"<span class='non-fe'>{model_outputs['input_sentence'][prev_end:span['start']]}</span>"
         fe_html += f"<span data-content='{fe_definitions[fe]}' class='fe-{fe.lower()}'>{model_outputs['input_sentence'][span['start']:span['end']]}</span>"
 
-        prev_end = span['end']
+        prev_end = span["end"]
     fe_html += f"<span>{model_outputs['input_sentence'][prev_end:]}</span>"
 
     # Get agent wikipedia page
@@ -126,6 +134,14 @@ async def submit_text(query: str, request: Request):
     image_url = get_member_image_url(model_outputs["congress_member"])
 
     # Render results page
-    return templates.TemplateResponse("results.html", {"request": request, "model_outputs": model_outputs, 
-                                                       "agent_summary": agent_summary, "agent_url": agent_url, 
-                                                       "fe_html": fe_html, "image_url": image_url})
+    return templates.TemplateResponse(
+        "results.html",
+        {
+            "request": request,
+            "model_outputs": model_outputs,
+            "agent_summary": agent_summary,
+            "agent_url": agent_url,
+            "fe_html": fe_html,
+            "image_url": image_url,
+        },
+    )
