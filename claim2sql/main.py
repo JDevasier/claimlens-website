@@ -91,7 +91,7 @@ async def model(query: str, request: Request):
 async def submit_text(query: str, request: Request):
     api_url = "http://idir.uta.edu/claimlens/api/"
 
-    # Call API to retrieve model inputs
+    # Call API to retrieve model outputs
     async with httpx.AsyncClient() as client:
         # model_response = await client.get(api_url, params={"claim": query})
         model_response = requests.get(api_url, params={"claim": query})
