@@ -52,7 +52,7 @@ async def read_fact_check(request: Request):
 
 
 @app.get("/model", response_class=JSONResponse)
-async def model(query: str, request: Request):
+async def model(claim: str, request: Request):
     model_outputs = {
         "input_sentence": "Joe Biden voted for the Iraq War.",
         "frame": "Vote",
@@ -67,16 +67,19 @@ async def model(query: str, request: Request):
                 "bill_title": "Iraq War Resolution",
                 "bill_id": "hjres114-107",
                 "bill_summary": "A joint resolution to authorize the use of United States Armed Forces against Iraq.",
+                "vote_type": "Yea",
             },
             {
                 "bill_title": "Gun Control Act",
                 "bill_id": "hjres114-110",
                 "bill_summary": "A bill to restrict the use of guns in the United States.",
+                "vote_type": "Nay",
             },
             {
                 "bill_title": "Abortion Act",
                 "bill_id": "hjres114-130",
                 "bill_summary": "A bill to allow the use of abortion in the United States.",
+                "vote_type": "Yea",
             },
         ],
         "congress_member": "Joe Biden",
@@ -88,11 +91,13 @@ async def model(query: str, request: Request):
 
 @app.get("/submit", response_class=HTMLResponse)
 async def submit_text(query: str, request: Request):
-    api_url = "http://idir.uta.edu/claimlens/api/"
+    api_url = "http://localhost:8000/model"
+    # api_url = "http://idir.uta.edu/claimlens/api/"
 
     # Call API to retrieve model inputs
     async with httpx.AsyncClient() as client:
-        model_response = requests.get(api_url, params={"claim": query})
+        model_response = await client.get(api_url, params={"claim": query})
+        # model_response = requests.get(api_url, params={"claim": query})
         model_outputs = model_response.json()
 
     # Define frame element definitions
