@@ -66,7 +66,7 @@ async def model(claim: str, request: Request):
             {
                 "bill_title": "Iraq War Resolution",
                 "bill_id": "hjres114-107",
-                "bill_summary": "A joint resolution to authorize the use of United States Armed Forces against Iraq.",
+                "bill_summary": "A joint resolution to authorize the use of United States Armed Forces against Iraq. A joint resolution to authorize the use of United States Armed Forces against Iraq. A joint resolution to authorize the use of United States Armed Forces against Iraq. A joint resolution to authorize the use of United States Armed Forces against Iraq. A joint resolution to authorize the use of United States Armed Forces against Iraq. A joint resolution to authorize the use of United States Armed Forces against Iraq. A joint resolution to authorize the use of United States Armed Forces against Iraq. A joint resolution to authorize the use of United States Armed Forces against Iraq.",
                 "vote_type": "Yea",
             },
             {
@@ -91,8 +91,8 @@ async def model(claim: str, request: Request):
 
 @app.get("/submit", response_class=HTMLResponse)
 async def submit_text(query: str, request: Request):
-    api_url = "http://localhost:8000/model"
-    # api_url = "http://idir.uta.edu/claimlens/api/"
+    # api_url = "http://localhost:8000/model"
+    api_url = "http://idir.uta.edu/claimlens/api/"
 
     # Call API to retrieve model inputs
     async with httpx.AsyncClient() as client:

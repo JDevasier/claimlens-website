@@ -28,6 +28,7 @@
     text-align: left;
     margin-top: 0.3rem;
     margin-bottom: 1.9rem;
+    font-style: italic;
 }
 
 .ui.button {
@@ -134,7 +135,6 @@
     height: auto;
 }
 
-
 .results-column-header {
     margin-top: 0;
     font-family: 'Montserrat', sans-serif;
@@ -154,4 +154,29 @@
 
 .results-column a {
     display: block;
+}
+
+.hide-long-text {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+
+.expand-summary {
+    cursor: pointer;
+}
+
+.yea {
+    color: #56F417;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.nay {
+    color: red;
+    font-style: italic;
+    font-weight: bold;
 }

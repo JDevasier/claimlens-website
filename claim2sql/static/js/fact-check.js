@@ -35,3 +35,12 @@ function submitForm() {
         }
     });
 }
+
+function toggleSummary(e) {
+    $(e).parent().find('.bill-summary').toggleClass('hide-long-text');
+    if ($(e).text() == 'Show more') {
+        $(e).text('Show less');
+    } else {
+        $(e).text('Show more');
+    }
+}
