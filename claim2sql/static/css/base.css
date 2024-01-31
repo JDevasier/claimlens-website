@@ -60,11 +60,26 @@ body {
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 
-#main-content-container {
+.main-content-container {
     min-height: calc(100% - 500px);
 }
 
 .ui.footer.segment {
     margin: 5em 0 0;
     padding: 5em 0;
+}
+
+.ui.inverted.link.list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ui.inverted.link.list table {
+    width: 70%;
+}
+
+.ui.inverted.link.list td {
+    width: 50%;
+    vertical-align: top;
 }
