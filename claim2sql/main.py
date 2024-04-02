@@ -13,9 +13,9 @@ import httpx
 # settings = Settings(SERVER_HOST='idir.uta.edu/claimlens/')
 
 
-app = FastAPI(root_path="https://idir.uta.edu/claimlens/")
-app.mount("/static", StaticFiles(directory="static"), name="static")
-# app.mount("idir.uta.edu/claimlens/static", StaticFiles(directory="static"), name="static")
+app = FastAPI()
+# app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("idir.uta.edu/claimlens/static", StaticFiles(directory="static"), name="static")
 
 
 templates = Jinja2Templates(directory="templates")
