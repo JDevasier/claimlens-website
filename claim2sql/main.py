@@ -5,17 +5,17 @@ from fastapi.templating import Jinja2Templates
 import wikipediaapi
 import requests
 import httpx
-# from pydantic import BaseSettings
+from pydantic import BaseSettings
 
-# class Settings(BaseSettings):
-#     SERVER_HOST: str
+class Settings(BaseSettings):
+    SERVER_HOST: str
 
-# settings = Settings(SERVER_HOST='idir.uta.edu/claimlens/')
+settings = Settings(SERVER_HOST='idir.uta.edu/claimlens/')
 
 
 app = FastAPI()
-# app.mount("/static", StaticFiles(directory="static"), name="static")
-app.mount("idir.uta.edu/claimlens/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory="static"), name="static")
+# app.mount("idir.uta.edu/claimlens/static", StaticFiles(directory="static"), name="static")
 
 
 templates = Jinja2Templates(directory="templates")
