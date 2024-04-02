@@ -4,7 +4,7 @@ body {
 
 .main.container {
     margin-top: 2em;
-    max-width: 950px;
+    max-width: 70em;
 }
 
 .ui.main.container .ui.header {
@@ -23,7 +23,7 @@ body {
 }
 
 .main.menu {
-    margin-top: 4em;
+    margin-top: 5em;
     border-radius: 0;
     border: none;
     box-shadow: none;
@@ -42,6 +42,7 @@ body {
 
 .main.menu .item {
     border: none !important;
+    font-weight: bolder;
 }
 
 .home-link {
@@ -51,13 +52,13 @@ body {
 .main.menu.fixed .item:first-child::after {
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
-    content: "Claim2SQL";
+    content: "ClaimLens";
 }
 
 .main.menu.fixed {
     background-color: #FFFFFF;
     border: 1px solid #DDD;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0.2em 0.3em rgba(0, 0, 0, 0.2);
 }
 
 .main-content-container {
