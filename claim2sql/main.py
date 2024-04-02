@@ -92,7 +92,7 @@ async def model(claim: str, request: Request):
 @app.get("/submit", response_class=HTMLResponse)
 async def submit_text(query: str, request: Request):
     # api_url = "http://localhost:8000/model"
-    api_url = "http://idir.uta.edu/claimlens/api/"
+    api_url = "https://idir.uta.edu/claimlens/api/"
 
     # Call API to retrieve model inputs
     async with httpx.AsyncClient() as client:
