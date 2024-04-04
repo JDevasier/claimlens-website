@@ -15,7 +15,8 @@ templates = Jinja2Templates(directory="templates")
 wiki = wikipediaapi.Wikipedia("idir_lab", "en")
 
 def get_default_request_vars():
-    return {'static_url_path':'https://idir.uta.edu/claimlens/static/'}
+    return {'static_url_path':'https://idir.uta.edu/claimlens/static/',
+            'base_url':'https://idir.uta.edu/claimlens/'}
 
 
 def get_member_image_url(member_name):

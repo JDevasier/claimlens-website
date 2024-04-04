@@ -29,13 +29,13 @@
                 <!-- TODO: update temp logo 
                     Credits: Icon designed by flaticon from Freepik
                     Link: https://www.freepik.com/free-icon/verified-database-symbol-interface_738334.htm#query=lens%20with%20checkmark&position=34&from_view=search&track=ais -->
-                <a href="/" class="header item">
+                <a href="{{ base_url }}" class="header item">
                     <img alt="claimlens_logo" src="{{ static_url_path }}/img/temp-logo.png">
                 </a>
             <!-- </div> -->
-            <a href="/fact-check" class="ui right floated item">Fact-Check</a>
-            <!-- <a href="/acknowledgement/" class="ui right floated item">Acknowledgement</a> -->
-            <!-- <a href="/src/publications.html" class="ui right floated item">Publications</a> -->
+            <a href="{{ base_url }}fact-check" class="ui right floated item">Fact-Check</a>
+            <!-- <a href="{{ base_url }}acknowledgement/" class="ui right floated item">Acknowledgement</a> -->
+            <!-- <a href="{{ base_url }}src/publications.html" class="ui right floated item">Publications</a> -->
         </div>
     </div>
     <div id="main-content-container" class="main ui container">
@@ -44,18 +44,6 @@
     <div class="ui inverted vertical footer segment">
         <div class="ui center aligned container">
             <div class="ui stackable inverted divided grid">
-                <!-- <div class="three wide column">
-                    <h4 class="ui inverted header">Other Projects</h4>
-                    <div class="ui inverted link list">
-                        <a href="https://cokn.org/" class="item">COKN</a>
-                        <a href="/covid-19/" class="item">COVID-19 Dashboard</a>
-                        <a href="/claimportal/" class="item">ClaimPortal</a>
-                        <a href="/frameannotator/" class="item">Frame Annotator</a>
-                        <a href="/maverick/" class="item">Maverick</a>
-                        <a href="/orion/" class="item">Orion</a>
-                    </div>
-                </div> -->
-
                 <div class="eight wide column">
                     <h4 class="ui inverted header">Resources</h4>
                     <div class="ui inverted link list">
@@ -63,22 +51,22 @@
                             <tr>
                                 <td>
                                     <li>
-                                        <a href="/fact-check" class="item">Fact-Check a Claim</a>
+                                        <a href="{{ base_url }}fact-check" class="item">Fact-Check a Claim</a>
                                     </li>
                                     <li>
-                                        <a href="/live/" class="item">Live Event Coverage</a>
+                                        <a href="{{ base_url }}live/" class="item">Live Event Coverage</a>
                                     </li>
                                     <li>
-                                        <a href="/debates/" class="item">U.S. Political Debates</a>
+                                        <a href="{{ base_url }}debates/" class="item">U.S. Political Debates</a>
                                     </li>
                                     <li>
-                                        <a href="/classifyfact_survey/" class="item">Data Collection</a>
+                                        <a href="{{ base_url }}classifyfact_survey/" class="item">Data Collection</a>
                                     </li>
                                 </td>
 
                                 <td>
                                     <li>
-                                        <a href="/api/" class="item">ClaimLens API</a>
+                                        <a href="{{ base_url }}api/" class="item">ClaimLens API</a>
                                     </li>
                                     <li>
                                         <a href="https://zenodo.org/record/3836810#.YFqIX69KgUE" class="item">ClaimLens Dataset</a>
@@ -93,29 +81,9 @@
                                 </td>
                             </tr>
                         </table>
-                        <!-- <a href="/fact-check" class="item">Fact-Check a Claim</a>
-                        <a href="/live/" class="item">Live Event Coverage</a>
-                        <a href="/debates/" class="item">U.S. Political Debates</a>
-                        <a href="/classifyfact_survey/" class="item">Data Collection</a>
-                        <a href="/api/" class="item">ClaimLens API</a>
-                        <a href="https://zenodo.org/record/3836810#.YFqIX69KgUE" class="item">ClaimLens Dataset</a>
-                        <a href="https://github.com/idirlab/claimspotter" class="item">GitHub</a>
-                        <a href="https://colab.research.google.com/github/idirlab/claimspotter/blob/master/adv_transformer/adv_transformer-notebook.ipynb"
-                            class="item">Colab</a> -->
+
                     </div>
                 </div>
-
-                <!-- <div class="four wide column">
-                    <h4 class="ui inverted header">ClaimBuster Papers</h4>
-                    <div class="ui inverted link list">
-                        <a href="http://ranger.uta.edu/~cli/pubs/2018/claimspotter-ijcnn18-jimenez.pdf"
-                            class="item">ClaimBuster (IJCNN)</a>
-                        <a href="http://ranger.uta.edu/~cli/pubs/2017/claimbuster-vldb17demo-hassan.pdf"
-                            class="item">ClaimBuster (VLDB)</a>
-                        <a href="http://ranger.uta.edu/~cli/pubs/2017/claimbuster-kdd17-hassan.pdf"
-                            class="item">ClaimBuster (KDD)</a>
-                    </div>
-                </div> -->
 
                 <div class="eight wide column">
                     <h4 class="ui inverted header">ClaimLens</h4>
@@ -126,7 +94,7 @@
             <!-- TODO: update temp logo 
                     Credits: Icon designed by flaticon from Freepik
                     Link: https://www.freepik.com/free-icon/verified-database-symbol-interface_738334.htm#query=lens%20with%20checkmark&position=34&from_view=search&track=ais -->
-            <a href="/">
+            <a href="{{ base_url }}">
                 <img alt="claimlens_logo" src="{{ static_url_path }}/img/temp-logo-footer.png"
                     class="ui centered mini image home-link">
             </a>
@@ -136,7 +104,7 @@
                         data-fa-transform="shrink-5"></i>rlab<i class="fas fa-at"></i>uta<i class="fas fa-circle"
                         data-fa-transform="shrink-10 down-2"></i>edu
                 </a>
-                <a class="item" href="/claimlensr/terms/">Terms and Conditions</a>
+                <a class="item" href="{{ base_url }}claimlensr/terms/">Terms and Conditions</a>
                 <!-- TODO: update current year auto -->
                 <span class="item" href="#"><i class="far fa-copyright"></i> 2023 -
                     <script>document.write(new Date().getFullYear());</script>
