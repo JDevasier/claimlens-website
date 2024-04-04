@@ -7,8 +7,14 @@ import requests
 import httpx
 
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.csp import CSPMiddleware
 
 origins = ["idir.uta.edu"]
+
+csp_rules = {
+    "default-src": "'self'"
+}
+
 
 # Set hostname to idir.uta.edu/claimlens/ for deployment
 app = FastAPI()
@@ -21,6 +27,8 @@ app.add_middleware(
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
+
+app.add_middleware(CSPMiddleware, policy=csp_rules)
 
 templates = Jinja2Templates(directory="templates")
 
