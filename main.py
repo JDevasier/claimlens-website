@@ -6,43 +6,9 @@ import wikipediaapi
 import requests
 import httpx
 
-from fastapi.middleware.cors import CORSMiddleware
-from starlette.middleware.base import BaseHTTPMiddleware
-
-class ContentSecurityPolicyMiddleware(BaseHTTPMiddleware):
-    def __init__(self, app: FastAPI, policy: str):
-        super().__init__(app)
-        self.policy = policy
-
-    async def dispatch(self, request: Request, call_next):
-        response = await call_next(request)
-        response.headers['Content-Security-Policy'] = self.policy
-        return response
-
-
-origins = ["idir.uta.edu"]
-
-csp_policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
-
-
-
 # Set hostname to idir.uta.edu/claimlens/ for deployment
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["GET", "POST"],
-    allow_headers=["*"],
-)
-
-app.add_middleware(
-    ContentSecurityPolicyMiddleware,
-    policy=csp_policy
-)
-
 
 templates = Jinja2Templates(directory="templates")
 
@@ -138,8 +104,6 @@ async def submit_text(query: str, request: Request, default_vars: dict = Depends
         model_response = await client.get(api_url, params={"claim": query})
         # model_response = requests.get(api_url, params={"claim": query})
         model_outputs = model_response.json()
-    
-    print(model_outputs)
 
     # Define frame element definitions
     fe_definitions = {
