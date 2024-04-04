@@ -6,9 +6,24 @@ import wikipediaapi
 import requests
 import httpx
 
+from fastapi.middleware.csp import CSPMiddleware
+
+csp_directives = {
+    "default-src": "'self'",  # Allow resources from the same origin
+    "script-src": ["'self'", "'unsafe-inline'"],  # Allowing inline scripts for now, but use cautiously
+    "style-src": ["'self'", "'unsafe-inline'"],   # Allowing inline styles for now, but use cautiously
+    "img-src": ["'self'", "data:"],  # Allowing images from the same origin and data URLs
+    "font-src": ["'self'"],          # Allowing fonts from the same origin
+}
+
 # Set hostname to idir.uta.edu/claimlens/ for deployment
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+app.add_middleware(
+    CSPMiddleware,
+    **csp_directives
+)
 
 templates = Jinja2Templates(directory="templates")
 
