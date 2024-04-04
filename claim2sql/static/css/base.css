@@ -1,5 +1,12 @@
 body {
     overflow-x: visible;
+    position: relative;
+}
+
+sticky-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 .main.container {
