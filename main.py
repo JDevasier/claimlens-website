@@ -7,13 +7,23 @@ import requests
 import httpx
 
 from fastapi.middleware.cors import CORSMiddleware
-from starlette.middleware.csp import CSPMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
+
+class ContentSecurityPolicyMiddleware(BaseHTTPMiddleware):
+    def __init__(self, app: FastAPI, policy: str):
+        super().__init__(app)
+        self.policy = policy
+
+    async def dispatch(self, request: Request, call_next):
+        response = await call_next(request)
+        response.headers['Content-Security-Policy'] = self.policy
+        return response
+
 
 origins = ["idir.uta.edu"]
 
-csp_rules = {
-    "default-src": "'self'"
-}
+csp_policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
+
 
 
 # Set hostname to idir.uta.edu/claimlens/ for deployment
@@ -28,7 +38,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.add_middleware(CSPMiddleware, policy=csp_rules)
+app.add_middleware(
+    ContentSecurityPolicyMiddleware,
+    policy=csp_policy
+)
+
 
 templates = Jinja2Templates(directory="templates")
 
