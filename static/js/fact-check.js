@@ -8,7 +8,7 @@ function submitForm() {
     //  Create AJAX call to send user input to server
     $.ajax({
         type: "GET",
-        url: "https://idir.uta.edu/claimlens/api/",
+        url: "https://idir.uta.edu/claimlens/submit/",
         data: { query: userInput },
         success: function (response) {
             document.getElementById("results-container").innerHTML = response;
