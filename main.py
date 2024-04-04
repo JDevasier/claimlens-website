@@ -6,9 +6,21 @@ import wikipediaapi
 import requests
 import httpx
 
+from fastapi.middleware.cors import CORSMiddleware
+
+origins = ["idir.uta.edu"]
+
 # Set hostname to idir.uta.edu/claimlens/ for deployment
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"],
+)
 
 templates = Jinja2Templates(directory="templates")
 
