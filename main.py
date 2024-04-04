@@ -96,14 +96,16 @@ async def model(claim: str, request: Request):
 
 @app.get("/submit", response_class=HTMLResponse)
 async def submit_text(query: str, request: Request, default_vars: dict = Depends(get_default_request_vars)):
-    # api_url = "http://localhost:8000/model"
-    api_url = "https://idir.uta.edu/claimlens/api/"
+    api_url = "http://192.168.1.11:8102/"
+    # api_url = "https://idir.uta.edu/claimlens/api/"
 
     # Call API to retrieve model inputs
     async with httpx.AsyncClient() as client:
         model_response = await client.get(api_url, params={"claim": query})
         # model_response = requests.get(api_url, params={"claim": query})
         model_outputs = model_response.json()
+    
+    print(model_outputs)
 
     # Define frame element definitions
     fe_definitions = {
@@ -120,9 +122,7 @@ async def submit_text(query: str, request: Request, default_vars: dict = Depends
     # Build html for frame elements
     prev_end = 0
     fe_html = ""
-    for fe, span in sorted(
-        model_outputs["frame_elements"].items(), key=lambda x: x[1]["start"]
-    ):
+    for fe, span in sorted(model_outputs["frame_elements"].items(), key=lambda x: x[1]["start"]):
         if span["start"] == -1 or span["end"] == -1:
             continue
 
