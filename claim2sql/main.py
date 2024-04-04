@@ -5,6 +5,7 @@ from fastapi.templating import Jinja2Templates
 import wikipediaapi
 import requests
 import httpx
+
 # from pydantic import BaseSettings
 
 # class Settings(BaseSettings):
@@ -13,7 +14,7 @@ import httpx
 # settings = Settings(SERVER_HOST='idir.uta.edu/claimlens/')
 
 # Set hostname to idir.uta.edu/claimlens/ for deployment
-app = FastAPI()
+app = FastAPI(openapi_prefix="https://idir.uta.edu/claimlens")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 # app.mount("idir.uta.edu/claimlens/static", StaticFiles(directory="static"), name="static")
 
