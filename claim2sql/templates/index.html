@@ -3,7 +3,7 @@
 ClaimLens: Automated Live Fact-checking
 {% endblock title %}
 {% block css %}
-<link href="{{ url_for('static', path='/css/index.css') }}" rel="stylesheet" />
+<link href="{{ static_url_path }}/css/index.css" rel="stylesheet" />
 {% endblock css %}
 {% block content %}
 
@@ -18,7 +18,7 @@ ClaimLens: Automated Live Fact-checking
 
     <div class="image">
         <!-- Photo by <a href="https://unsplash.com/@jontyson?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Jon Tyson</a> on <a href="https://unsplash.com/photos/white-and-black-labeled-pack-AN7CTlQaRs8?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a> -->
-        <img src="{{ url_for('static', path='/img/jon-tyson-cropped.jpg') }}">
+        <img src="{{ static_url_path }}/img/jon-tyson-cropped.jpg">
     </div>
     <section class="content">
         <h2 class="intro-header">About the Project</h2>
@@ -52,5 +52,5 @@ ClaimLens: Automated Live Fact-checking
 
 {% endblock content %}
 {% block js %}
-<script src="{{ url_for('static', path='/js/index.js') }}"></script>
+<script src="{{ static_url_path }}/js/index.js"></script>
 {% endblock js %}

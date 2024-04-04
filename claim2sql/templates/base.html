@@ -12,7 +12,7 @@
     <title>{% block title %}{% endblock title %}</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.css">
-    <link href="{{ url_for('static', path='/css/base.css') }}" rel="stylesheet">
+    <link href="{{ static_url_path }}/css/base.css" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,800;0,900;1,400;1,500;1,600;1,800;1,900&display=swap"
         rel="stylesheet">
@@ -30,7 +30,7 @@
                     Credits: Icon designed by flaticon from Freepik
                     Link: https://www.freepik.com/free-icon/verified-database-symbol-interface_738334.htm#query=lens%20with%20checkmark&position=34&from_view=search&track=ais -->
                 <a href="/" class="header item">
-                    <img alt="claimlens_logo" src="{{ url_for('static', path='/img/temp-logo.png') }}">
+                    <img alt="claimlens_logo" src="{{ static_url_path }}/img/temp-logo.png">
                 </a>
             <!-- </div> -->
             <a href="/fact-check" class="ui right floated item">Fact-Check</a>
@@ -127,7 +127,7 @@
                     Credits: Icon designed by flaticon from Freepik
                     Link: https://www.freepik.com/free-icon/verified-database-symbol-interface_738334.htm#query=lens%20with%20checkmark&position=34&from_view=search&track=ais -->
             <a href="/">
-                <img alt="claimlens_logo" src="{{ url_for('static', path='/img/temp-logo-footer.png') }}"
+                <img alt="claimlens_logo" src="{{ static_url_path }}/img/temp-logo-footer.png"
                     class="ui centered mini image home-link">
             </a>
             <div class="ui horizontal inverted small divided link list">
@@ -150,7 +150,7 @@
         integrity="sha512-RXf+QSDCUQs5uwRKaDoXt55jygZZm2V++WUZduaU/Ui/9EGp3f/2KZVahFZBKGH0s774sd3HmrhUy+SgOFQLVQ=="
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.js"></script>
-    <script src="{{ url_for('static', path='/js/base.js') }}"></script>
+    <script src="{{ static_url_path }}/js/base.js"></script>
     {% block js %}{% endblock js %}
 </body>
 

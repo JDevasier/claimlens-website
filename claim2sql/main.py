@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Depends
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -6,22 +6,16 @@ import wikipediaapi
 import requests
 import httpx
 
-# from pydantic import BaseSettings
-
-# class Settings(BaseSettings):
-#     SERVER_HOST: str
-
-# settings = Settings(SERVER_HOST='idir.uta.edu/claimlens/')
-
 # Set hostname to idir.uta.edu/claimlens/ for deployment
-app = FastAPI(openapi_prefix="https://idir.uta.edu/claimlens")
+app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
-# app.mount("idir.uta.edu/claimlens/static", StaticFiles(directory="static"), name="static")
-
 
 templates = Jinja2Templates(directory="templates")
 
 wiki = wikipediaapi.Wikipedia("idir_lab", "en")
+
+def get_default_request_vars():
+    return {'static_url_path':'https://idir.uta.edu/claimlens/static/'}
 
 
 def get_member_image_url(member_name):
@@ -52,13 +46,13 @@ def get_member_image_url(member_name):
 
 
 @app.get("/", response_class=HTMLResponse)
-async def read_root(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+async def read_root(request: Request, default_vars: dict = Depends(get_default_request_vars)):
+    return templates.TemplateResponse("index.html", {"request": request, **default_vars})
 
 
 @app.get("/fact-check", response_class=HTMLResponse)
-async def read_fact_check(request: Request):
-    return templates.TemplateResponse("fact-check.html", {"request": request})
+async def read_fact_check(request: Request, default_vars: dict = Depends(get_default_request_vars)):
+    return templates.TemplateResponse("fact-check.html", {"request": request, **default_vars})
 
 
 @app.get("/model", response_class=JSONResponse)
@@ -100,7 +94,7 @@ async def model(claim: str, request: Request):
 
 
 @app.get("/submit", response_class=HTMLResponse)
-async def submit_text(query: str, request: Request):
+async def submit_text(query: str, request: Request, default_vars: dict = Depends(get_default_request_vars)):
     # api_url = "http://localhost:8000/model"
     api_url = "https://idir.uta.edu/claimlens/api/"
 
@@ -156,5 +150,6 @@ async def submit_text(query: str, request: Request):
             "agent_url": agent_url,
             "fe_html": fe_html,
             "image_url": image_url,
+            **default_vars
         },
     )
