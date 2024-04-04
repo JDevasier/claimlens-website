@@ -7,11 +7,12 @@ import requests
 import httpx
 
 csp_directives = {
-    "default-src": "'self'",  # Allow resources from the same origin
-    "script-src": ["'self'", "'unsafe-inline'"],  # Allowing inline scripts for now, but use cautiously
-    "style-src": ["'self'", "'unsafe-inline'"],   # Allowing inline styles for now, but use cautiously
-    "img-src": ["'self'", "data:"],  # Allowing images from the same origin and data URLs
-    "font-src": ["'self'"],          # Allowing fonts from the same origin
+    "default-src": "'self'",  
+    "script-src": ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net", "cdnjs.cloudflare.com"],  # Add CDNs for external scripts
+    "style-src": ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net"],  # Add CDNs for external stylesheets
+    "img-src": ["'self'", "data:", "idir.uta.edu"],  # Add domain for images
+    "font-src": ["'self'", "fonts.gstatic.com"],  # Add Google Fonts CDN
+    # Add more directives as needed
 }
 
 # Set hostname to idir.uta.edu/claimlens/ for deployment
