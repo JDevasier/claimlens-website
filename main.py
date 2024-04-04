@@ -6,12 +6,28 @@ import wikipediaapi
 import requests
 import httpx
 
+# csp_directives = {
+#     "default-src": "'self'",  
+#     "script-src": ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net", "cdnjs.cloudflare.com"],  # Add CDNs for external scripts
+#     "style-src": ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net"],  # Add CDNs for external stylesheets
+#     "img-src": ["'self'", "data:", "idir.uta.edu"],  # Add domain for images
+#     "font-src": ["'self'", "fonts.gstatic.com"],  # Add Google Fonts CDN
+#     # Add more directives as needed
+# }
+
 csp_directives = {
-    "default-src": "'self'",  
-    "script-src": ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net", "cdnjs.cloudflare.com"],  # Add CDNs for external scripts
-    "style-src": ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net"],  # Add CDNs for external stylesheets
-    "img-src": ["'self'", "data:", "idir.uta.edu"],  # Add domain for images
-    "font-src": ["'self'", "fonts.gstatic.com"],  # Add Google Fonts CDN
+    "default-src": "'self' *",
+    "script-src": "'self' 'unsafe-inline' 'unsafe-eval' *",
+    "style-src": "'self' 'unsafe-inline' *",
+    "img-src": "'self' *",
+    "font-src": "'self' *",
+    "connect-src": "'self' *",
+    "frame-src": "'self' *",
+    "media-src": "'self' *",
+    "object-src": "'self' *",
+    "child-src": "'self' *",
+    "form-action": "'self' *",
+    "frame-ancestors": "'self' *",
     # Add more directives as needed
 }
 
