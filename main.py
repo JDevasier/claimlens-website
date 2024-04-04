@@ -6,7 +6,9 @@ import wikipediaapi
 import requests
 import httpx
 
-from fastapi.middleware.csp import CSPMiddleware
+from starlette.middleware import Middleware
+from starlette.middleware.cors import CORSMiddleware
+from starlette.middleware.headers import CSPMiddleware
 
 csp_directives = {
     "default-src": "'self'",  # Allow resources from the same origin
@@ -16,14 +18,14 @@ csp_directives = {
     "font-src": ["'self'"],          # Allowing fonts from the same origin
 }
 
-# Set hostname to idir.uta.edu/claimlens/ for deployment
-app = FastAPI()
-app.mount("/static", StaticFiles(directory="static"), name="static")
+middleware = [
+    Middleware(CORSMiddleware, allow_origins=["*"]),  # You can adjust CORS policy as needed
+    Middleware(CSPMiddleware, **csp_directives)
+]
 
-app.add_middleware(
-    CSPMiddleware,
-    **csp_directives
-)
+# Set hostname to idir.uta.edu/claimlens/ for deployment
+app = FastAPI(middleware=middleware)
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="templates")
 
