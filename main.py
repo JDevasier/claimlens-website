@@ -6,10 +6,6 @@ import wikipediaapi
 import requests
 import httpx
 
-from starlette.middleware import Middleware
-from starlette.middleware.cors import CORSMiddleware
-from starlette.middleware.headers import CSPMiddleware
-
 csp_directives = {
     "default-src": "'self'",  # Allow resources from the same origin
     "script-src": ["'self'", "'unsafe-inline'"],  # Allowing inline scripts for now, but use cautiously
@@ -18,14 +14,15 @@ csp_directives = {
     "font-src": ["'self'"],          # Allowing fonts from the same origin
 }
 
-middleware = [
-    Middleware(CORSMiddleware, allow_origins=["*"]),  # You can adjust CORS policy as needed
-    Middleware(CSPMiddleware, **csp_directives)
-]
-
 # Set hostname to idir.uta.edu/claimlens/ for deployment
-app = FastAPI(middleware=middleware)
+app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.middleware("http")
+async def add_csp_headers(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["Content-Security-Policy"] = ";".join([f"{key} {value}" if isinstance(value, str) else f"{key} {' '.join(value)}" for key, value in csp_directives.items()])
+    return response
 
 templates = Jinja2Templates(directory="templates")
 
