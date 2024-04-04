@@ -3,8 +3,8 @@ body {
     position: relative;
 }
 
-sticky-footer {
-    position: absolute !important;
+.sticky-footer {
+    position: absolute;
     bottom: 0;
     width: 100%;
 }
